@@ -9,9 +9,11 @@ public class HelicopterInput : MonoBehaviour
 
     public bool leftTurn;
     public bool rightTurn; 
-    public bool isEngin;
-    public bool isUp;
-    public bool isDown;
+    public bool IsEngin;
+    public bool IsUp;
+    public bool IsDown;
+    public bool IsBullet;
+    public bool IsMissile;
     // Start is called before the first frame update
 
 
@@ -26,9 +28,11 @@ public class HelicopterInput : MonoBehaviour
         leftTurn = Input.GetKey(KeyCode.Q);
         rightTurn = Input.GetKey(KeyCode.E);
 
-        isEngin = Input.GetKeyDown(KeyCode.R);
-        isUp = Input.GetKey(KeyCode.Space);
-        isDown = Input.GetKey(KeyCode.C);
+        IsEngin = Input.GetKeyDown(KeyCode.R);
+        IsUp = Input.GetKey(KeyCode.Space);
+        IsDown = Input.GetKey(KeyCode.C);
+        IsBullet = Input.GetKey(KeyCode.A);
+        IsMissile = Input.GetKey(KeyCode.S);
        
     }
 }

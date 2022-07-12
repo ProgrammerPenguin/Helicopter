@@ -2,30 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wingmove : MonoBehaviour
+public class WingMove : MonoBehaviour
 {
     public GameObject Wing;
     public GameObject TailWing;
     private HelicopterInput _input;
-    private Transform TP;
-    private Rigidbody RG;
+    private Transform _transform;
+    private Rigidbody _rigidbody;
     private bool IsWing = false;
     private bool IsReady = false;
     public float HelicopterSpeed = 1f;
     public float WingSpeed = 1f;
     public float WingSpeedMax = 10f;
+    public float Gravity = -100f;
     // Start is called before the first frame update
     void Start()
     {
         _input = GetComponent<HelicopterInput>();
-        TP = GetComponent<Transform>();
-        RG = GetComponent<Rigidbody>();
+        _transform = GetComponent<Transform>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_input.isEngin)
+        if (_input.IsEngin)
         {
             IsWing = !IsWing;
         }
@@ -40,12 +41,12 @@ public class Wingmove : MonoBehaviour
                 WingSpeed = WingSpeedMax;
                 IsReady = true;
             }
-            RG.useGravity = false;
+            _rigidbody.useGravity = false;
         } 
         else
         {
-            Physics.gravity = new Vector3(0f, -1500f, 0f);
-            RG.useGravity = true;
+            Physics.gravity = new Vector3(0f, Gravity, 0f);
+            _rigidbody.useGravity = true;
             if (WingSpeed > 0)
             {
                 WingSpeed -= 1f;
@@ -60,15 +61,15 @@ public class Wingmove : MonoBehaviour
 
         if (IsReady)
         {
-            if (_input.isUp)
+            if (_input.IsUp)
             {
                 HelicopterSpeed += 0.05f;
-                RG.AddForce(0f, HelicopterSpeed, 0f);
+                _rigidbody.AddForce(0f, HelicopterSpeed, 0f);
             }
-            else if (_input.isDown)
+            else if (_input.IsDown)
             {
                 HelicopterSpeed += 0.05f;
-                RG.AddForce(0f, -HelicopterSpeed, 0f);
+                _rigidbody.AddForce(0f, -HelicopterSpeed, 0f);
             }
             else if (HelicopterSpeed > 0)
             {
